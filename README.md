@@ -12,7 +12,7 @@ Version as of writing - 4.0.11, md5: `27311fac5443d865a5d2ac2db6de38db`
 
 ## Mobile applications
 - Android - written in Qt5 (whyyy ;_;), https://github.com/OpenTails/CRUMPET-Android
-- iOS - written in Swift, can't say much
+- iOS - written in Swift, https://github.com/MasterTailer/CRUMPET-iOS
 
 <details>
     <summary>just use https://github.com/OpenTails/CRUMPET-Android/wiki/Tail-Command-Protocol, idk why i didn't google for that</summary>
