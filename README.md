@@ -1,4 +1,30 @@
 # MiTail by Tail Company - protocol & research
+
+## TODO
+- Reverse-engineering of the firmware
+    - Useful tools:
+        - [Working bin2elf converter](https://github.com/yawor/esp32_image_parser/tree/app_image) (plus [this patch](https://github.com/tenable/esp32_image_parser/pull/11.patch))
+        - [Working Ghidra disassembler/decompiler plugin](https://github.com/Ebiroll/ghidra-xtensa)
+    - There are more commands in the firmware (not listed below), also potentially dangerous, like `FORMATNVS`
+
+## Firmware
+Last firmware info available [here](https://thetailcompany.com/fw/mitail).
+Version as of writing - 4.0.11, md5: `27311fac5443d865a5d2ac2db6de38db`
+
+## Services:
+- `0x1800` - Generic Access
+    - `0x2A00` - Device Name; READ; `mitail`
+    - `0x2A01` - Appearence; READ; `0`?
+- `0x1801` - Generic Attribute
+    - `0x2A05` - Service Changed; INDICATE
+- `3af2108b-d066-42da-a7d4-55648fa0a9b6`
+    - `c6612b64-0087-4974-939e-68968ef294b0` - used for notifications about commands execution; NOTIFY, READ; `TAILS1 END`/`TAILS1 BEGIN`
+    - `5bfd6484-ddee-4723-bfe6-b653372bbfd6` - used for sending commands; INDICATE, WRITE; `TAILS1`
+- `0x180F` - Battery Service
+    - `0x2A19` - Battery Level; NOTIFY, READ; `0x4D` (77%)
+    - `b08fed02-0584-40ef-b006-aff7e0d24e13` - Battery Voltage; NOTIFY, READ; `0x8F1E` (?)
+    - `5073792e-4fc0-45a0-b0a5-78b6c1756c91` - Charging state; NOTIFY, READ; `CHARGE OFF`/`CHARGE COMPLETE`/`CHARGE ON`
+
 ## Commands
 - `TAILEP` - High Wag
 - `TAILER` - Stand Up!
@@ -29,39 +55,4 @@
 
 ## Unknown commands (found in firmware):
 - `TAILHM`
-- `TAILU1`
-- `TAILU2`
-- `TAILU3`
-- `TAILU4`
-
-## Handles:
-- `0x000C` - begin/end notifications
-- `0x000F` - command
-- `0x0013` - battery, in decimal %
-
-## Services:
-- `0x1800` - Generic Access
-    - `0x2A00` - Device Name; READ; `mitail`
-    - `0x2A01` - Appearence; READ; `0`?
-- `0x1801` - Generic Attribute
-    - `0x2A05` - Service Changed; INDICATE
-        - `0x2902` - Client Characteristic Configuration Descriptor
-- `3af2108b-d066-42da-a7d4-55648fa0a9b6`
-    - `c6612b64-0087-4974-939e-68968ef294b0` - NOTIFY, READ; `TAILS1 END`/`TAILS1 BEGIN`
-        - `0x2902` - Client Characteristic Configuration Descriptor
-    - `5bfd6484-ddee-4723-bfe6-b653372bbfd6` - INDICATE, WRITE; `TAILS1`
-        - `0x2902` - Client Characteristic Configuration Descriptor
-- `0x180F` - Battery Service
-    - `0x2A19` - Battery Level; NOTIFY, READ; `0x4D` (77%)
-        - `0x2902` - Client Characteristic Configuration Descriptor
-        - `0x2901` - Characteristic User Description
-    - `b08fed02-0584-40ef-b006-aff7e0d24e13` - Battery Voltage; NOTIFY, READ; `0x8F1E` (?)
-        - `0x2902` - Client Characteristic Configuration Descriptor
-        - `0x2901` - Characteristic User Description
-    - `5073792e-4fc0-45a0-b0a5-78b6c1756c91` - Charging state; NOTIFY, READ; `CHARGE OFF`/`CHARGE COMPLETE`/`CHARGE ON`
-        - `0x2902` - Client Characteristic Configuration Descriptor
-        - `0x2901` - Characteristic User Description
-
-## Firmware
-Last firmware info available [here](https://thetailcompany.com/fw/mitail).
-Version as of writing - 4.0.11, md5: `27311fac5443d865a5d2ac2db6de38db`
+- `TAILU1`/`TAILU2`/`TAILU3`/`TAILU4` - probably user presets, probably aren't used in the current app version
