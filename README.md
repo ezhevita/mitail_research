@@ -5,11 +5,15 @@
     - Useful tools:
         - [Working bin2elf converter](https://github.com/yawor/esp32_image_parser/tree/app_image) (plus [this patch](https://github.com/tenable/esp32_image_parser/pull/11.patch))
         - [Working Ghidra disassembler/decompiler plugin](https://github.com/Ebiroll/ghidra-xtensa)
-    - There are more commands in the firmware (not listed below), also potentially dangerous, like `FORMATNVS`
+    - There are more commands in the firmware, also potentially dangerous, like `FORMATNVS`
 
 ## Firmware
 Last firmware info available [here](https://thetailcompany.com/fw/mitail).
 Version as of writing - 4.0.11, md5: `27311fac5443d865a5d2ac2db6de38db`
+
+## Mobile applications
+- Android - written in Qt5 (whyyy ;_;), all the logic is in the `libdigitail_arm64-v8a.so` library, has much more features than iOS app
+- iOS - written in Swift, can't say much
 
 ## Services:
 - `0x1800` - Generic Access
@@ -56,3 +60,15 @@ Version as of writing - 4.0.11, md5: `27311fac5443d865a5d2ac2db6de38db`
 ## Unknown commands (found in firmware):
 - `TAILHM`
 - `TAILU1`/`TAILU2`/`TAILU3`/`TAILU4` - probably are user presets, not used in the current app version
+- `USERMOVE`
+- `USERLEDS`
+- `LOWBATT` - not sure if this is an actual command
+- `OTA`
+- `HWVER`
+- `PING` - apparently responds with `PONG`
+- `GLOWTIP TRUE`/`GLOWTIP FALSE` - probably toggles the glowing tip of the tail, can't test due to the model that doesn't have one
+- `TASKU`
+- `STOPNPM`
+- `CONFRD` - reading the configuration
+- `CONFWR` - writing the configuration
+    - Configuration: `Received config: ver %hhu, minsToSleep %hhu, minsToNPM %hhu, minNPMPauseSec %hhu, maxNPMPauseSec %hhu, groupsNPM %hhu.` - what does NPM stand for?
