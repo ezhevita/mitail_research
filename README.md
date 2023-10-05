@@ -55,4 +55,4 @@ Version as of writing - 4.0.11, md5: `27311fac5443d865a5d2ac2db6de38db`
 
 ## Unknown commands (found in firmware):
 - `TAILHM`
-- `TAILU1`/`TAILU2`/`TAILU3`/`TAILU4` - probably user presets, probably aren't used in the current app version
+- `TAILU1`/`TAILU2`/`TAILU3`/`TAILU4` - probably are user presets, not used in the current app version
